@@ -1,0 +1,16 @@
+/home/ghawk/.rvm/rubies/ruby-2.1.4/bin/ruby -r ./siteconf20151005-6383-14irldp.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+compiling crypt.c
+compiling wrapper.c
+compiling bcrypt_ext.c
+compiling crypt_blowfish.c
+compiling crypt_gensalt.c
+linking shared-object bcrypt_ext.so
+
+make "DESTDIR=" install
+/usr/bin/install -c -m 0755 bcrypt_ext.so ./.gem.20151005-6383-bdbt73
+installing default bcrypt_ext libraries

@@ -1,0 +1,24 @@
+<div class="col-xs-12 col-sm-8">
+   <div class="row-fluid">
+     <%= form_for @comment, url: comments_path, remote: true do |f| %>
+
+        <%= f.hidden_field :article_id, value: @article.id %>
+
+        <% if current_user %>
+
+            <%= f.hidden_field :user_id, value: current_user.id %>
+
+        <% end %>
+
+        <%= f.label :comment %>
+
+        <%= f.text_area :content, cols: 60, rows: 10 %>
+
+
+
+        <%= f.submit :submit %>
+
+     <% end %>
+
+     </div>
+</div>

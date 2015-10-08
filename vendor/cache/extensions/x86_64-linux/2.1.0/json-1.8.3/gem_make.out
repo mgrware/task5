@@ -1,0 +1,10 @@
+/home/ghawk/.rvm/rubies/ruby-2.1.4/bin/ruby -r ./siteconf20151004-3073-1yzb8i.rb extconf.rb
+creating Makefile
+
+make "DESTDIR=" clean
+
+make "DESTDIR="
+make: Nothing to be done for `all'.
+
+make "DESTDIR=" install
+installing default libraries
