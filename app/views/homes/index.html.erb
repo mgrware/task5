@@ -1,0 +1,31 @@
+<%= render 'shared/carousel' %>
+
+    <div class="bs-docs-featurette">
+      <div class="container">
+        <h2 class="bs-docs-featurette-title">Welcome</h2>
+        <p class="lead">Enjoy Your Tour and Having Fun.</p>
+
+        <hr class="half-rule">
+
+        <div class="row">
+          <% @articles.each do |article| %>
+          <div class="col-sm-4">
+            <label><i>New articles release</i></label>
+            <h3><%= article.title %></h3>
+          <p><%= article.content.truncate(145) %></p>
+           <%= link_to "Read More", article_path(article.id), :class => "btn btn-primary" %></p>
+          </div>
+          <% end %>
+        </div>
+
+        <hr class="half-rule">
+
+        <p class="lead">Bootstrap is open source. It's hosted, developed, and maintained on GitHub.</p>
+        <a href="https://github.com/twbs/bootstrap" class="btn btn-outline btn-lg">View the GitHub project</a>
+      </div>
+    </div>
+
+    <div class="bs-docs-featurette">
+      <div class="container">
+        <h2 class="bs-docs-featurette-title">Built with Bootstrap.</h2>
+        <p class="lead">Millions of amazing sites across the web are being built with Bootstrap. Get started on your own with our growing <a href="../getting-started/#examples">collection of examples</a> or by exploring some of our favorites.</p>

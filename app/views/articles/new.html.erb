@@ -33,6 +33,9 @@
 <% end %>
 
 <h2>Import article</h2>
+<li data-row="1" data-col="1" data-sizex="1" data-sizey="1">
+      <div data-id="valuation" data-view="Number" data-title="Current Valuation" data-prefix="$"></div>
+    </li>
 <%= form_tag import_articles_path, multipart: true do %>
   <%= file_field_tag :file %>
   <%= submit_tag "Import" %>

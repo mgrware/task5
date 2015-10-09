@@ -10,12 +10,64 @@ def index
  end
 end
 
+
+
+
+
   def new
   @article = Article.new
+
 end
 
+
 def import
-  Article.import(params[:file])
+
+valid_keys= ["id","title","content","status"]
+
+total_row = 0
+    spreadsheet = Article.open_spreadsheet(params[:file])
+
+    # spreadsheet.sheets.each_with_index do |sheet, index|
+    #   spreadsheet.default_sheet = spreadsheet.sheets[index]
+# byebug
+      header = Array.new
+      spreadsheet.row(1).each { |row| header << row.downcase.tr(' ', '_') }
+      (2..spreadsheet.last_row).each do |i|
+        row = Hash[[header, spreadsheet.row(i)].transpose]
+          data = Article.create(row)
+
+
+spreadsheet.default_sheet= spreadsheet.sheets.last
+
+ header = Array.new
+      spreadsheet.row(1).each { |row| header << row.downcase.tr(' ', '_') }
+      (2..spreadsheet.last_row).each do |i|
+        row = Hash[[header, spreadsheet.row(i)].transpose]
+        data=row.to_hash.slice(*valid_keys)
+          #user_id=Article.all.select(:id)
+# accesible=["id","content"]
+
+    # comment= row.to_hash.slice(accesible)
+    # byebug
+
+               comment = Article.last.comments.create(data)
+
+
+    @articles=Article.all.order(:created_at).page(params[:page]).per(5)
+    @comments = Comment.all
+
+end
+
+
+
+
+      # end
+
+end
+
+
+
+
   redirect_to root_url, notice: "Products imported."
 end
 
@@ -89,14 +141,14 @@ def show
        @article = Article.find_by_id(params[:id])
 
        @comments = @article.comments.order("id desc")
-
        @comment = Comment.new
 
-  def download_pdf
-  html = render_to_string(:action => '../pdf/my_template', :layout => false)
-  pdf = PDFKit.new(html)
-  send_data(pdf.to_pdf)
-end
+       respond_to do |format|
+         format.html
+         format.csv { send_data Article.to_csv }
+         format.xls
+       end
+
    end
 
 

@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :users
   resources :comments
   resources :articles
-  root :to => 'articles#index'
+  resources :homes
+  root :to => 'homes#index'
 
   resources :articles do
     collection { post :import }
